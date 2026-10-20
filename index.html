@@ -1,0 +1,382 @@
+<!doctype html>
+<!-- Design language inspired by Kern Society (Mike Shocking). Content and build: Vedang Pandey. -->
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vedang Pandey — AI research, systems, chess</title>
+<meta name="description" content="Vedang Pandey is a Mathematics &amp; Computing undergraduate at MIT Manipal building AI systems: concept unlearning, agent pipelines, realtime platforms and chess engines.">
+<meta property="og:title" content="Vedang Pandey — AI research, systems, chess">
+<meta property="og:description" content="Mathematics &amp; Computing at MIT Manipal. Concept unlearning, agent pipelines, realtime systems, chess engines.">
+<meta property="og:image" content="og.jpg">
+<meta property="og:image:alt" content="Vedang Pandey — AI research, systems, chess">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="website">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#EFEBE3">
+<link rel="icon" href="favicon.png" type="image/png" sizes="512x512">
+<link rel="apple-touch-icon" href="favicon.png">
+
+<script>
+(function (d, w) {
+  try {
+    if (localStorage.getItem('vp-theme') === 'dark') {
+      d.setAttribute('data-theme', 'dark');
+      var m = d.querySelector('meta[name="theme-color"]');
+      if (m) m.setAttribute('content', '#0E0E0E');
+    }
+  } catch (e) {}
+  var c = d.className.replace(/\bno-js\b/, 'js'), first = false;
+  if (w.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) c += ' rm';
+  else try {
+    first = !sessionStorage.getItem('vp-loader');
+    sessionStorage.setItem('vp-loader', '1');
+  } catch (e) { first = false; }
+  if (first) {
+    c += ' is-loading';
+    w.__vpLoaderFailsafe = setTimeout(function () { d.classList.remove('is-loading'); }, 4000);
+  }
+  d.className = c;
+})(document.documentElement, window);
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&amp;family=Recursive:slnt,wght,CASL,CRSV,MONO@-15..0,300..1000,0..1,0..1,0..1&amp;family=Roboto+Flex:opsz,slnt,wdth,wght,GRAD@8..144,-10..0,25..151,100..1000,-200..150&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&amp;family=Recursive:slnt,wght,CASL,CRSV,MONO@-15..0,300..1000,0..1,0..1,0..1&amp;family=Roboto+Flex:opsz,slnt,wdth,wght,GRAD@8..144,-10..0,25..151,100..1000,-200..150&amp;display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&amp;family=Recursive:slnt,wght,CASL,CRSV,MONO@-15..0,300..1000,0..1,0..1,0..1&amp;family=Roboto+Flex:opsz,slnt,wdth,wght,GRAD@8..144,-10..0,25..151,100..1000,-200..150&amp;display=swap"></noscript>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.css" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="loader" data-loader aria-hidden="true">
+  <div class="loader__inner">
+    <p class="loader__mark">VP</p>
+    <p class="loader__count mono">000</p>
+  </div>
+</div>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="nav" id="top">
+  <a class="nav__logo" href="#top" aria-label="Vedang Pandey, back to top">
+    <span class="logo__mark" aria-hidden="true">VP</span>
+  </a>
+  <button class="nav__toggle mono" type="button" aria-expanded="false" aria-controls="nav-panel" data-label-open="Menu" data-label-close="Close">Menu</button>
+  <div class="nav__panel" id="nav-panel">
+    <nav class="nav__links" aria-label="Sections">
+      <a href="#experience">Experience</a>
+      <a href="#work">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="theme mono" type="button" data-theme-toggle aria-pressed="false" aria-label="Switch to dark mode">Dark</button>
+    <a class="btn btn--solid nav__cta" href="https://drive.google.com/file/d/1gq1YrApbpI6-aZXyuhpDoxxt6CnFhvm1/view?usp=sharing" target="_blank" rel="noopener noreferrer">Résumé <span aria-hidden="true">↗</span></a>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============================================================ Hero -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero__ruler" aria-hidden="true">
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      <i class="hero__marker"></i>
+    </div>
+
+    <h1 class="hero__title" id="hero-title">
+      <span class="sr-only">Vedang Pandey</span>
+      <span class="wm" aria-hidden="true">
+        <span class="wm__line"><span class="wm__l">V</span><span class="wm__l">E</span><span class="wm__l">D</span><span class="wm__l">A</span><span class="wm__l">N</span><span class="wm__l">G</span></span><span class="wm__l wm__sp"> </span><span class="wm__line"><span class="wm__l">P</span><span class="wm__l">A</span><span class="wm__l">N</span><span class="wm__l">D</span><span class="wm__l">E</span><span class="wm__l">Y</span></span>
+      </span>
+    </h1>
+
+    <div class="hero__body">
+      <a class="btn btn--solid hero__cta" href="#work">Projects</a>
+      <p class="hero__scroll mono">Scroll ↓</p>
+    </div>
+  </section>
+
+  <!-- ========================================================= (01) About -->
+  <section class="section section--ink manifesto" aria-labelledby="manifesto-label">
+    <div class="grid">
+      <p class="label manifesto__label" id="manifesto-label">(01) About</p>
+      <div class="manifesto__body" data-split>
+        <p>Hi, I’m Vedang, currently pursuing an undergrad in Mathematics and Computing at MIT Manipal.</p>
+        <p>My work so far has spanned machine unlearning, concept erasure, graph neural networks, reinforcement learning, and generative models. I enjoy exploring different areas, experimenting with ideas.</p>
+        <p>Outside research, I spend a fair amount of time playing chess, scrolling through X, watching F1, and inevitably getting distracted by something interesting.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================================================== (02) Experience -->
+  <section class="section experience" id="experience" aria-labelledby="experience-heading" tabindex="-1">
+    <h2 class="label section__label" id="experience-heading">(02) Experience</h2>
+
+    <div class="xp" data-xp>
+      <span class="xp__rail" aria-hidden="true"><span class="xp__fill" data-xp-fill></span></span>
+      <ol class="xp__list">
+        <li class="xp__item is-active" data-xp-item>
+          <div class="xp__when">
+            <p class="mono">May — Jul 2026</p>
+            <p class="xp__len mono">3 months</p>
+          </div>
+          <div class="xp__main">
+            <h3 class="xp__role">AI Research Intern</h3>
+            <p class="xp__org mono">IIT Guwahati</p>
+            <ul class="xp__points">
+              <li>Built a graph neural network to detect coordinated attacks in 8M+ real IoT packets, then stress-tested it with synthetic attacks and an AI red-team agent.</li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="xp__item" data-xp-item>
+          <div class="xp__when">
+            <p class="mono">Apr 2025 — Aug 2026</p>
+            <p class="xp__len mono">17 months</p>
+          </div>
+          <div class="xp__main">
+            <h3 class="xp__role">AI Researcher</h3>
+            <p class="xp__org mono">R.U.G.V.E.D. Systems</p>
+            <ul class="xp__points">
+              <li>First-authored SPACE (Style Preserving Attribute Constrained Erasure): a method that removes a target concept from Stable Diffusion v1.4 without damaging the rest of the image. Saliency-selected LoRA on cross-attention layers, a dual-anchor teacher and four-view prompts separate concept from style — 12% better FID than UCE, 27% stronger erasure.</li>
+              <li>2nd of ~350 submissions at Genµ 2.0 (U&amp;ME @ ECCV 2026), solo; ERB 57.33. <a href="https://iab-iitj.github.io/genmu2026/leaderboard.html" target="_blank" rel="noopener noreferrer">Leaderboard ↗</a></li>
+            </ul>
+          </div>
+        </li>
+
+      </ol>
+    </div>
+  </section>
+
+  <!-- ========================================================= (03) Projects -->
+  <section class="section work" id="work" aria-labelledby="work-heading" tabindex="-1">
+    <h2 class="label section__label" id="work-heading">(03) Projects</h2>
+
+    <ul class="cards">
+      <li class="card">
+        <div class="card__top mono"><span>Engines</span></div>
+        <figure class="card__media"><img src="assets/projects/janus.webp" alt="Janus analysis board with search settings and principal variation panel" width="800" height="500" loading="lazy" decoding="async"></figure>
+        <div class="card__foot">
+          <h3 class="card__name">Janus</h3>
+          <p class="card__desc">A classical chess engine built on bitboards, with alpha–beta search and a live analysis interface. Search depth, principal variation, nodes and a per-piece evaluation stream to a custom SVG board.</p>
+          <ul class="card__tags mono"><li>Python</li><li>FastAPI</li><li>React</li><li>WebSockets</li></ul>
+          <div class="card__links">
+            <a class="card__repo mono" href="https://github.com/Vedang-P/Janus-chess-engine" target="_blank" rel="noopener noreferrer" aria-label="Janus on GitHub">GitHub ↗</a>
+            <a class="card__live mono" href="https://janus-chess-engine-v2.pages.dev/" target="_blank" rel="noopener noreferrer" aria-label="Open the live Janus demo">Live ↗</a>
+          </div>
+        </div>
+      </li>
+
+      <li class="card">
+        <div class="card__top mono"><span>RL</span></div>
+        <figure class="card__media"><img src="assets/projects/chess-rl.webp" alt="Chess RL training dashboard with a KQK board, reward curves and outcome metrics" width="800" height="500" loading="lazy" decoding="async"></figure>
+        <div class="card__foot">
+          <h3 class="card__name">Chess RL</h3>
+          <p class="card__desc">A neural Q-learning agent trained on the King + Queen vs King endgame. A live dashboard tracks reward, checkmate rate and queen safety, with optional Syzygy tablebase comparison.</p>
+          <ul class="card__tags mono"><li>PyTorch</li><li>python-chess</li><li>Matplotlib</li><li>Syzygy</li></ul>
+          <div class="card__links">
+            <a class="card__repo mono" href="https://github.com/Vedang-P/Chess-RL-neural" target="_blank" rel="noopener noreferrer" aria-label="Chess RL on GitHub">GitHub ↗</a>
+          </div>
+        </div>
+      </li>
+
+      <li class="card">
+        <div class="card__top mono"><span>Agents</span></div>
+        <figure class="card__media"><img src="assets/projects/parasite.webp" alt="Parasite landing page asking to attach a repository and describe a change" width="800" height="500" loading="lazy" decoding="async"></figure>
+        <div class="card__foot">
+          <h3 class="card__name">Parasite</h3>
+          <p class="card__desc">A browser coding agent that attaches to a public repository, plans a change, edits it and runs the tests. A 24-region semantic map over Neo4j and Qdrant keeps the codebase legible while it works.</p>
+          <ul class="card__tags mono"><li>FastAPI</li><li>Next.js</li><li>Neo4j</li><li>Qdrant</li></ul>
+          <div class="card__links">
+            <a class="card__repo mono" href="https://github.com/Vedang-P/parasite" target="_blank" rel="noopener noreferrer" aria-label="Parasite on GitHub">GitHub ↗</a>
+            <a class="card__live mono" href="https://parasite-ai.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="Open the live Parasite demo">Live ↗</a>
+          </div>
+        </div>
+      </li>
+
+      <li class="card">
+        <div class="card__top mono"><span>Web</span></div>
+        <figure class="card__media"><img src="assets/projects/portfolio-xp.webp" alt="Windows XP desktop with the Bliss wallpaper, desktop icons and taskbar" width="800" height="500" loading="lazy" decoding="async"></figure>
+        <div class="card__foot">
+          <h3 class="card__name">Portfolio XP</h3>
+          <p class="card__desc">A front-end portfolio built as a full Windows XP desktop: boot and login, draggable windows, a taskbar, system sounds and a shutdown flow. Static, no backend, all in the browser.</p>
+          <ul class="card__tags mono"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+          <div class="card__links">
+            <a class="card__repo mono" href="https://github.com/Vedang-P/Portfolio-win-xp" target="_blank" rel="noopener noreferrer" aria-label="Portfolio XP on GitHub">GitHub ↗</a>
+            <a class="card__live mono" href="https://portfolio-win-xp.pages.dev/" target="_blank" rel="noopener noreferrer" aria-label="Open the live Portfolio XP demo">Live ↗</a>
+          </div>
+        </div>
+      </li>
+
+      <li class="card">
+        <div class="card__top mono"><span>Realtime</span></div>
+        <figure class="card__media"><img src="assets/projects/zapdos.webp" alt="Zapdos ASCII wordmark cover with ELO and timer details" width="800" height="500" loading="lazy" decoding="async"></figure>
+        <div class="card__foot">
+          <h3 class="card__name">Zapdos</h3>
+          <p class="card__desc">Real-time 1v1 competitive programming duels with progressive unlocks, a server-authoritative 20-minute timer and ELO matchmaking. Opponents see each other’s progress, never their code.</p>
+          <ul class="card__tags mono"><li>TypeScript</li><li>Next.js</li><li>PostgreSQL</li><li>Redis</li></ul>
+          <div class="card__links">
+            <a class="card__repo mono" href="https://github.com/Vedang-P/Zapdos" target="_blank" rel="noopener noreferrer" aria-label="Zapdos on GitHub">GitHub ↗</a>
+          </div>
+        </div>
+      </li>
+
+      <li class="card">
+        <div class="card__top mono"><span>Game</span></div>
+        <figure class="card__media"><img src="assets/projects/prompt-arena.webp" alt="Prompt Arena title card over a dusk gazebo scene" width="800" height="500" loading="lazy" decoding="async"></figure>
+        <div class="card__foot">
+          <h3 class="card__name">Prompt Arena</h3>
+          <p class="card__desc">A cinematic 3D whodunit built for a 70-team event: 9 acts, 14 rooms, 56 clues and 58 puzzles. Interrogate the cast, build a notebook and climb the live leaderboard.</p>
+          <ul class="card__tags mono"><li>React</li><li>three.js</li><li>Postgres</li></ul>
+          <div class="card__links">
+            <a class="card__repo mono" href="https://github.com/Vedang-P/prompt-arena-mystery" target="_blank" rel="noopener noreferrer" aria-label="Prompt Arena on GitHub">GitHub ↗</a>
+            <a class="card__live mono" href="https://prompt-arena-mystery.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="Open the live Prompt Arena demo">Live ↗</a>
+          </div>
+        </div>
+      </li>
+    </ul>
+
+  </section>
+
+  <!-- ==================================================== (04) Achievements -->
+  <section class="section achievements" id="achievements" aria-labelledby="achievements-heading" tabindex="-1">
+    <h2 class="label section__label" id="achievements-heading">(04) Other contributions &amp; achievements</h2>
+
+    <ol class="ach">
+      <li class="ach__item">
+        <span class="ach__n mono" aria-hidden="true">01</span>
+        <div class="ach__main">
+          <h3 class="ach__title">Runner-up, Genµ 2.0 Concept Unlearning Challenge</h3>
+          <p class="ach__detail">Solo researcher · ~350 submissions · ERB 57.33 · ECCV 2026</p>
+        </div>
+      </li>
+      <li class="ach__item">
+        <span class="ach__n mono" aria-hidden="true">02</span>
+        <div class="ach__main">
+          <h3 class="ach__title">Research &amp; ML Head — Manipal Information Security Team (MIST)</h3>
+          <p class="ach__detail">Led research and ML domains, mentored 300+ members</p>
+        </div>
+      </li>
+      <li class="ach__item">
+        <span class="ach__n mono" aria-hidden="true">03</span>
+        <div class="ach__main">
+          <h3 class="ach__title">7th, TechSolstice ’26</h3>
+          <p class="ach__detail">Flagship technical and innovation fest · MIT Bengaluru</p>
+        </div>
+      </li>
+      <li class="ach__item">
+        <span class="ach__n mono" aria-hidden="true">04</span>
+        <div class="ach__main">
+          <h3 class="ach__title">Top 50 / 400, H7CTF 2025</h3>
+          <p class="ach__detail">Capture the flag · 400 teams</p>
+        </div>
+      </li>
+      <li class="ach__item">
+        <span class="ach__n mono" aria-hidden="true">05</span>
+        <div class="ach__main">
+          <h3 class="ach__title">12th / 120, CryptIT CTF</h3>
+          <p class="ach__detail">Capture the flag · 120 teams</p>
+        </div>
+      </li>
+      <li class="ach__item">
+        <span class="ach__n mono" aria-hidden="true">06</span>
+        <div class="ach__main">
+          <h3 class="ach__title">Captain, MIT Chess Team</h3>
+          <p class="ach__detail">Training, tournament strategy and team coordination</p>
+        </div>
+      </li>
+      <li class="ach__item">
+        <span class="ach__n mono" aria-hidden="true">07</span>
+        <div class="ach__main">
+          <h3 class="ach__title">2× Gold, MAHE Inter-College Championship</h3>
+          <p class="ach__detail">Captain · 1st of 16 colleges</p>
+        </div>
+      </li>
+      <li class="ach__item">
+        <span class="ach__n mono" aria-hidden="true">08</span>
+        <div class="ach__main">
+          <h3 class="ach__title">Ex-professional chess player</h3>
+          <p class="ach__detail">Peak 2200 on Chess.com</p>
+        </div>
+      </li>
+    </ol>
+
+  </section>
+
+  <!-- ====================================================== (05) Contact -->
+  <section class="section contact" id="contact" aria-labelledby="contact-heading" tabindex="-1">
+    <div class="grid contact__head">
+      <h2 class="label contact__label" id="contact-heading">(05) Contact</h2>
+      <p class="contact__lede">Open to research collaborations, work, or just chatter in general.</p>
+    </div>
+
+    <div class="contact__grid">
+      <div class="contact__left">
+        <p class="label">Email</p>
+        <a class="contact__email" href="mailto:vedangpandeyy@gmail.com">vedangpandeyy@gmail.com</a>
+        <ul class="contact__links mono">
+          <li><a href="https://github.com/Vedang-P" target="_blank" rel="noopener noreferrer">GitHub ↗</a></li>
+          <li><a href="https://www.linkedin.com/in/vedangpandey/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></li>
+          <li><a href="https://drive.google.com/file/d/1gq1YrApbpI6-aZXyuhpDoxxt6CnFhvm1/view?usp=sharing" target="_blank" rel="noopener noreferrer">Résumé ↗</a></li>
+        </ul>
+      </div>
+
+      <form class="contact__form" data-contact novalidate>
+        <div class="field">
+          <label class="label" for="cf-name">Name</label>
+          <input id="cf-name" name="name" type="text" autocomplete="name" placeholder="Ada Lovelace" required>
+        </div>
+        <div class="field">
+          <label class="label" for="cf-email">Email</label>
+          <input id="cf-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+        </div>
+        <div class="field field--full">
+          <label class="label" for="cf-message">Message</label>
+          <textarea id="cf-message" name="message" rows="5" placeholder="A sentence or two is plenty." required></textarea>
+        </div>
+        <div class="contact__actions">
+          <button class="btn btn--solid" type="submit">Send message</button>
+          <button class="btn" type="button" data-copy>Copy email</button>
+        </div>
+        <p class="contact__status mono" data-form-status aria-live="polite">Opens your mail app. Nothing is stored here.</p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer section--ink">
+  <div class="grid footer__top">
+    <div class="footer__col">
+      <h2 class="footer__heading">Elsewhere</h2>
+      <ul class="footer__links mono">
+        <li><a href="https://github.com/Vedang-P" target="_blank" rel="noopener noreferrer">GitHub ↗</a></li>
+        <li><a href="https://www.linkedin.com/in/vedangpandey/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></li>
+        <li><a href="https://x.com/vedangstwt" target="_blank" rel="noopener noreferrer">Twitter ↗</a></li>
+        <li><a href="mailto:vedangpandeyy@gmail.com">Email ↗</a></li>
+        <li><a href="https://drive.google.com/file/d/1gq1YrApbpI6-aZXyuhpDoxxt6CnFhvm1/view?usp=sharing" target="_blank" rel="noopener noreferrer">Résumé ↗</a></li>
+      </ul>
+    </div>
+    <div class="footer__col footer__col--right">
+      <h2 class="footer__heading">Based in</h2>
+      <p class="footer__body">Manipal, India.<br><span class="mono" data-clock>— IST</span></p>
+    </div>
+  </div>
+
+  <div class="grid footer__credits mono">
+    <p>© 2026 Vedang Pandey</p>
+    <p class="footer__credit">Designed &amp; built by Vedang Pandey</p>
+    <p><a href="#top">Back to top ↑</a></p>
+  </div>
+
+  <p class="footer__mark" aria-hidden="true"><span>V</span><span>P</span></p>
+</footer>
+
+<script defer src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+<script defer src="main.js"></script>
+</body>
+</html>
